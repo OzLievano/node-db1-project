@@ -8,20 +8,28 @@ module.exports = {
     remove,
 }
 
-function get(){
-    return db('accounts')
+async function get(){
+    const accounts = await db('accounts')
+    return accounts;
 }
 
-function getById(){
-    return Promise.resolve('get wired');
+async function getById(id){
+    const [account] = await db('accounts').where({id});
+    return account;
 }
 
-function create(){
-    return Promise.resolve('get wired');
+async function create(data){
+    // returns an id
+
+    const [accountId] = await db('accounts').insert(data);
+    const account = await getById(accountId)
+    return account;
 }
 
-function update(){
-    return Promise.resolve('get wired');
+async function update(id,changes){
+    const count = await db('accounts').where({id}).update(changes)
+
+    return count;
 }
 
 function remove(){
