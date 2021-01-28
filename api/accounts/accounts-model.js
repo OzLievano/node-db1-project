@@ -27,12 +27,15 @@ async function create(data){
 }
 
 async function update(id,changes){
+    // returns number of items updated
     const count = await db('accounts').where({id}).update(changes)
 
     return count;
 }
 
-function remove(){
-    return Promise.resolve('get wired');
+async function remove(id){
+    //returns number of items deleted
+    const count = await db('accounts').where({id}).del();
+    return count;
 }
 

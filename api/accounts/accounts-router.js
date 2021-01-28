@@ -54,4 +54,20 @@ router.put('/:id',function updateAccount(req,res){
         res.status(500).json({error:error.message})
     })
 })
+
+router.delete('/:id',function deleteAccount(req,res){
+    const {id} = req.params;
+    
+    if(!id){
+        res.status(404).json({error:"id not found"})
+    }else{
+        Accounts.remove(id)
+    .then((account)=>{
+        res.status(200).json({messaage:`you have deleted account number ${id}`})
+    })
+    .catch((error)=>{
+        res.status(500).json({error:error.message})
+    })
+    }
+})
 module.exports = router;
