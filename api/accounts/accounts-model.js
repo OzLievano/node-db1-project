@@ -9,8 +9,7 @@ module.exports = {
 }
 
 function get(){
-    return Promise.resolve('get wired');
-    db.('accounts')
+    return db('accounts')
 }
 
 function getById(){
